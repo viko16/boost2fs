@@ -6,15 +6,15 @@ const B2f = require('../lib')
 const pkg = require('../package.json')
 
 const cli = meow(`
-  Boost2fs v${pkg.version}
-  Conversion Boostnote to normal files.
-
   Usage:
     b2f [dir] [options]
 
+  Commands:
+    dir             Specify the input path, which includes 'boostnote.json' ( default: ./ )
+
   Options:
-    --output        Specify the output patch - default: ./out
-    -v, --version   Output version number
+    --output        Specify the output path   ( default: ./out )
+    -v, --version   Output version number     ( v${pkg.version} now )
     -h, --help      Output usage information
 `, {
   alias: {
