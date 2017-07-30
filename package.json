@@ -1,0 +1,37 @@
+{
+  "name": "boost2fs",
+  "description": "Conversion Boostnote to normal files.",
+  "version": "0.0.0",
+  "repository": "viko16/boost2fs",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "bin": {
+    "b2f": "bin/boost2fs.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "keywords": [
+    "conversion",
+    "Boostnote"
+  ],
+  "author": "viko16 <16viko@gmail.com>",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "standard"
+  },
+  "devDependencies": {
+    "standard": "^9.0.0"
+  },
+  "dependencies": {
+    "async-to-gen": "^1.3.3",
+    "cson": "^4.1.0",
+    "meow": "^3.7.0",
+    "mkdirp": "^0.5.1",
+    "mz": "^2.6.0"
+  }
+}
