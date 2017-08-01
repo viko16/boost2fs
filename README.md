@@ -4,7 +4,7 @@
 [![Node version](https://img.shields.io/node/v/boost2fs.svg?style=flat)](https://github.com/viko16/boost2fs)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
-🚀 Conversion Boostnote to normal files.
+🚀 Convert Boostnote to normal files.
 
 
 ## Install
@@ -16,7 +16,7 @@ $ [sudo] npm install -g boost2fs
 ## Usage
 
 ```bash
-Conversion Boostnote to normal files.
+Convert Boostnote to normal files.
 
 Usage:
   b2f [dir] [options]

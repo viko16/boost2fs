@@ -1,20 +1,21 @@
 {
   "name": "boost2fs",
-  "description": "Conversion Boostnote to normal files.",
+  "description": "Convert Boostnote to normal files.",
   "version": "0.1.1",
   "repository": "viko16/boost2fs",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "index.js",
   "bin": {
-    "b2f": "bin/boost2fs.js"
+    "b2f": "cli.js"
   },
   "files": [
     "bin",
     "lib"
   ],
   "keywords": [
-    "conversion",
-    "Boostnote"
+    "convert",
+    "Boostnote",
+    "markdown"
   ],
   "author": "viko16 <16viko@gmail.com>",
   "engines": {
