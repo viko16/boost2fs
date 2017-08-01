@@ -2,8 +2,8 @@
 
 require('async-to-gen/register')
 const meow = require('meow')
-const B2f = require('../lib')
-const pkg = require('../package.json')
+const B2f = require('.')
+const pkg = require('./package.json')
 
 const cli = meow(`
   Usage:

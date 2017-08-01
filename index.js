@@ -4,8 +4,8 @@ const mkdirp = require('mkdirp')
 const cson = require('cson')
 
 const cwd = process.cwd()
-const defaultInputPath = './'
-const defaultOutputPath = './out'
+const DEFAULT_INPUT_PATH = './'
+const DEFAULT_OUTPUT_PATH = './out'
 
 const NOTE_TYPE = {
   MARKDOWN_NOTE: 'MARKDOWN_NOTE',
@@ -14,8 +14,8 @@ const NOTE_TYPE = {
 
 class B2f {
   constructor (config = {}) {
-    this.inputPath = path.resolve(cwd, config.inputPath || defaultInputPath)
-    this.outputPath = path.resolve(cwd, config.outputPath || defaultOutputPath)
+    this.inputPath = path.resolve(cwd, config.inputPath || DEFAULT_INPUT_PATH)
+    this.outputPath = path.resolve(cwd, config.outputPath || DEFAULT_OUTPUT_PATH)
     this.folders = []
   }
 
