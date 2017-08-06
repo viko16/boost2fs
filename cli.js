@@ -7,19 +7,20 @@ const pkg = require('./package.json')
 
 const cli = meow(`
   Usage:
-    b2f [dir] [options]
+    b2f [baseDir] [options]
 
   Commands:
-    dir             Specify the input path, which includes 'boostnote.json' ( default: ./ )
+    baseDir         Specify the input path, which includes 'boostnote.json' ( default: process.cwd() )
 
   Options:
-    --output        Specify the output path   ( default: ./out )
+    -o, --output    Specify the output path   ( default: ./out )
     -v, --version   Output version number     ( v${pkg.version} now )
     -h, --help      Output usage information
 `, {
   alias: {
     h: 'help',
-    v: 'version'
+    v: 'version',
+    o: 'output'
   }
 })
 
@@ -31,6 +32,5 @@ const config = {
 if (cli.flags.output === true) {
   console.error(`Value for 'output' of type '[String]' required.`)
 } else {
-  const b2f = new B2f(config)
-  b2f.start()
+  new B2f(config).run()
 }

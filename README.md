@@ -19,13 +19,13 @@ $ [sudo] npm install -g boost2fs
 Convert Boostnote to normal files.
 
 Usage:
-  b2f [dir] [options]
+  b2f [baseDir] [options]
 
 Commands:
-  dir             Specify the input path, which includes 'boostnote.json' ( default: ./ )
+  baseDir         Specify the input path, which includes 'boostnote.json' ( default: `process.cwd()` )
 
 Options:
-  --output        Specify the output path   ( default: ./out )
+  -o, --output    Specify the output path   ( default: ./out )
   -v, --version   Output version number
   -h, --help      Output usage information
 ```

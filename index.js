@@ -2,6 +2,8 @@ const path = require('path')
 const fs = require('mz/fs')
 const mkdirp = require('mkdirp')
 const cson = require('cson')
+const ora = require('ora')
+const colors = require('colors/safe')
 
 const cwd = process.cwd()
 const DEFAULT_INPUT_PATH = './'
@@ -16,65 +18,61 @@ class B2f {
   constructor (config = {}) {
     this.inputPath = path.resolve(cwd, config.inputPath || DEFAULT_INPUT_PATH)
     this.outputPath = path.resolve(cwd, config.outputPath || DEFAULT_OUTPUT_PATH)
-    this.folders = []
+    this.folders = {}
   }
 
-  async start () {
-    const folders = await this.readFoldersInfo()
-    this.folders = folders.reduce((pre, cur) => {
-      pre[cur.key] = cur.name
-      return pre
-    }, {})
+  async run () {
+    try {
+      this.ora = ora({
+        text: 'Searching',
+        stream: process.stdout
+      }).start()
+      this.folders = await this.readFoldersInfo()
 
-    const notes = await this.listNotes()
-    console.log(`Found ${notes.length} notes.`)
+      const notes = await this.listNotes()
+      this.ora.stopAndPersist({ text: `Found ${notes.length} notes.` }).start()
 
-    for (let index = 0; index < notes.length; index++) {
-      const note = notes[index]
-      await this.readNote(note)
+      for (let index = 0; index < notes.length; index++) {
+        const note = notes[index]
+        await this.readNote(note)
+      }
+      this.ora.succeed(colors.green('Done.'))
+    } catch (err) {
+      this.ora.fail(colors.red(err.message))
     }
-    console.log('Done.')
   }
 
   async readFoldersInfo () {
     const filePath = path.resolve(this.inputPath, 'boostnote.json')
-    console.log('reading ' + filePath)
-    try {
-      const info = await fs.readFile(filePath, 'utf-8')
-      const json = JSON.parse(info)
-      return json.folders
-    } catch (error) {
-      console.error('reading folders error', error)
-      return []
-    }
+    this.ora.text = `Reading ${filePath}`
+    const info = await fs.readFile(filePath, 'utf-8')
+    const json = JSON.parse(info)
+    const folders = json.folders
+    return folders.reduce((result, { key, name }) => {
+      result[key] = name
+      return result
+    }, {})
   }
 
   async listNotes () {
     const dirPath = path.resolve(this.inputPath, 'notes')
-    console.log('reading ' + dirPath)
-    try {
-      return await fs.readdir(dirPath)
-    } catch (error) {
-      console.error('reading notes/ error', error)
-      return []
-    }
+    this.ora.text = `Reading ${dirPath}`
+    const files = await fs.readdir(dirPath)
+    return files.filter(item => item.endsWith('.cson'))
   }
 
   async readNote (fileName) {
     const filePath = path.resolve(this.inputPath, 'notes', fileName)
     // Parses a CSON file into an Object
     const parsedObj = await cson.load(filePath)
-    if (parsedObj.type === NOTE_TYPE.MARKDOWN_NOTE) {
-      await this.parseMarkdownNote(parsedObj)
-    }
-    if (parsedObj.type === NOTE_TYPE.SNIPPET_NOTE) {
-      await this.parseSnippetNote(parsedObj)
-    }
+    if (parsedObj.type === NOTE_TYPE.MARKDOWN_NOTE) await this.parseMarkdownNote(parsedObj)
+    else if (parsedObj.type === NOTE_TYPE.SNIPPET_NOTE) await this.parseSnippetNote(parsedObj)
   }
 
   makeFolderDirectories (folderHash, nextFolder = '') {
     const folderName = this.folders[folderHash]
     const outputFolderPath = path.resolve(this.outputPath, folderName, nextFolder)
+    // make sure the folder existed
     mkdirp.sync(outputFolderPath)
     return outputFolderPath
   }
