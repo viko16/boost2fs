@@ -1,6 +1,5 @@
 const path = require('path')
-const fs = require('mz/fs')
-const mkdirp = require('mkdirp')
+const fs = require('fs-extra')
 const cson = require('cson')
 const ora = require('ora')
 const colors = require('colors/safe')
@@ -65,29 +64,42 @@ class B2f {
     const filePath = path.resolve(this.inputPath, 'notes', fileName)
     // Parses a CSON file into an Object
     const parsedObj = await cson.load(filePath)
-    if (parsedObj.type === NOTE_TYPE.MARKDOWN_NOTE) await this.parseMarkdownNote(parsedObj)
-    else if (parsedObj.type === NOTE_TYPE.SNIPPET_NOTE) await this.parseSnippetNote(parsedObj)
+    // Skip the deleted note
+    if (parsedObj.isTrashed === true) return
+
+    switch (parsedObj.type) {
+      case NOTE_TYPE.MARKDOWN_NOTE:
+        await this.parseMarkdownNote(parsedObj)
+        break
+      case NOTE_TYPE.SNIPPET_NOTE:
+        await this.parseSnippetNote(parsedObj)
+        break
+      default:
+        console.info('unhandle type: ', parsedObj.type)
+        break
+    }
   }
 
-  makeFolderDirectories (folderHash, nextFolder = '') {
+  async makeFolderDirectories (folderHash, nextFolder = '') {
     const folderName = this.folders[folderHash]
     const outputFolderPath = path.resolve(this.outputPath, folderName, nextFolder)
-    // make sure the folder existed
-    mkdirp.sync(outputFolderPath)
+    await fs.ensureDir(outputFolderPath)
     return outputFolderPath
   }
 
   async parseMarkdownNote (obj) {
     const { folder, title, content } = obj
-    const outputFolderPath = this.makeFolderDirectories(folder)
+    const outputFolderPath = await this.makeFolderDirectories(folder)
     await fs.writeFile(path.resolve(outputFolderPath, title + '.md'), content, 'utf-8')
   }
 
   async parseSnippetNote (obj) {
     const { folder, title, snippets } = obj
-    const outputFolderPath = this.makeFolderDirectories(folder, title)
+    const outputFolderPath = await this.makeFolderDirectories(folder, title)
     for (let i = 0; i < snippets.length; i++) {
-      const { name, content } = snippets[i]
+      let { name, content } = snippets[i]
+      // the snippet without name
+      if (!name) name = '<noname>' + i
       await fs.writeFile(path.resolve(outputFolderPath, name), content, 'utf-8')
     }
   }
