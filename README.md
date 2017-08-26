@@ -9,7 +9,7 @@
 
 ## Install
 
-```bash
+``` bash
 $ [sudo] npm install -g boost2fs
 ```
 
@@ -30,6 +30,16 @@ Options:
   -h, --help      Output usage information
 ```
 
+## Feature
+
+- Export all notes into the output folder.
+- Covert <u>Markdown Notes</u> to `{title}.md`.
+- Covert <u>Snippet Notes</u> to `{title}/{filename}`.
+- Deleted notes will be skipped.
+
+## Limitation
+
+- Tags, Star, Description in Snippet will be ignored. 🙈
 
 ## Thanks
 - [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote) - Note-taking app for programmers.
