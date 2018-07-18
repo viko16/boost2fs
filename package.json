@@ -1,7 +1,7 @@
 {
   "name": "boost2fs",
   "description": "Convert Boostnote to normal files.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "repository": "viko16/boost2fs",
   "license": "MIT",
   "main": "index.js",
