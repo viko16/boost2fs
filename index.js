@@ -90,7 +90,9 @@ class B2f {
   async parseMarkdownNote (obj) {
     const { folder, title, content } = obj
     const outputFolderPath = await this.makeFolderDirectories(folder)
-    await fs.writeFile(path.resolve(outputFolderPath, title + '.md'), content, 'utf-8')
+    // fix unexpected too long title, see https://github.com/viko16/boost2fs/issues/2
+    const safeTitle = title.substr(0, 200)
+    await fs.writeFile(path.resolve(outputFolderPath, safeTitle + '.md'), content, 'utf-8')
   }
 
   async parseSnippetNote (obj) {

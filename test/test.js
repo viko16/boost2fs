@@ -11,6 +11,7 @@ const fixturePath = path.resolve(__dirname, './fixtures')
 describe('Usage', () => {
   const expectedFiles = [
     path.resolve(fixturePath, 'out', 'Default/Welcome to Boostnote :).md'),
+    path.resolve(fixturePath, 'out', `Default/${'very long content. '.repeat(20).substr(0, 200)}.md`),
     path.resolve(fixturePath, 'out', 'Default/Snippet note example/example.js'),
     path.resolve(fixturePath, 'out', 'Default/Snippet note example/example.html')
   ]
@@ -30,7 +31,7 @@ describe('Usage', () => {
   it('should work without any arguments', async () => {
     await coffee.fork(binfile, [], { cwd: fixturePath })
       // .debug()
-      .expect('stdout', [ /Found 2 notes/, /Done/ ])
+      .expect('stdout', [ /Found \d+ notes/, /Done/ ])
       .expect('code', 0)
       .end()
     await assertFileExists(expectedFiles)
@@ -39,7 +40,7 @@ describe('Usage', () => {
   it('should work with specified baseDir and --output', async () => {
     await coffee.fork(binfile, [ fixturePath, `--output=${fixturePath}/out` ])
       // .debug()
-      .expect('stdout', [ /Found 2 notes/, /Done/ ])
+      .expect('stdout', [ /Found \d+ notes/, /Done/ ])
       .expect('code', 0)
       .end()
     await assertFileExists(expectedFiles)
