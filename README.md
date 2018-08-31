@@ -3,6 +3,7 @@
 [![NPM version](https://img.shields.io/npm/v/boost2fs.svg?style=flat)](https://npmjs.org/package/boost2fs)
 [![Node version](https://img.shields.io/node/v/boost2fs.svg?style=flat)](https://github.com/viko16/boost2fs)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
+[![Build Status](https://travis-ci.org/viko16/boost2fs.svg?branch=master)](https://travis-ci.org/viko16/boost2fs)
 
 🚀 Convert Boostnote to normal files.
 
