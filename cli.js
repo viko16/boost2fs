@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-require('async-to-gen/register')
 const meow = require('meow')
 const B2f = require('.')
 const pkg = require('./package.json')
