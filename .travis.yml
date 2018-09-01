@@ -2,3 +2,6 @@ language: node_js
 node_js:
   - v8
   - stable
+os:
+  - linux
+  - osx

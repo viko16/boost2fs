@@ -10,10 +10,14 @@ const fixturePath = path.resolve(__dirname, './fixtures')
 
 describe('Usage', () => {
   const expectedFiles = [
-    path.resolve(fixturePath, 'out', 'Default/Welcome to Boostnote :).md'),
+    // Markdown
+    path.resolve(fixturePath, 'out', 'Default/Welcome to Boostnote ).md'),
     path.resolve(fixturePath, 'out', `Default/${'very long content. '.repeat(20).substr(0, 200)}.md`),
+    path.resolve(fixturePath, 'out', 'Default/Note title contains invalid characters like , abspath, u0000123.md'),
+    // Snippet
     path.resolve(fixturePath, 'out', 'Default/Snippet note example/example.js'),
-    path.resolve(fixturePath, 'out', 'Default/Snippet note example/example.html')
+    path.resolve(fixturePath, 'out', 'Default/Snippet note example/example.html'),
+    path.resolve(fixturePath, 'out', 'Default/Snippet title contains invalid characters like , abspath, u0000123/case1.js')
   ]
 
   afterEach(async () => {

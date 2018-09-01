@@ -1,0 +1,14 @@
+createdAt: "2018-09-01T13:13:35.478Z"
+updatedAt: "2018-09-01T14:29:08.942Z"
+type: "MARKDOWN_NOTE"
+folder: "b5286af3539af1256e11"
+title: "Note title contains invalid characters like \"\\/:*?\\\"|\", \"/abs/path\", \"\\u0000123\""
+content: '''
+  Note title contains invalid characters like "\\/:*?\\"<>|", "/abs/path", "\\u0000123"
+  
+  
+  > Test case for [Note content not sanitized; code snippets in notes can break script · Issue #1 · viko16/boost2fs · GitHub](https://github.com/viko16/boost2fs/issues/1)
+'''
+tags: []
+isStarred: false
+isTrashed: false

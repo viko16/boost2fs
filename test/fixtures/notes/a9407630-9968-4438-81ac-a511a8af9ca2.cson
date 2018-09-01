@@ -1,0 +1,16 @@
+createdAt: "2018-09-01T14:02:54.051Z"
+updatedAt: "2018-09-01T14:29:01.320Z"
+type: "SNIPPET_NOTE"
+folder: "b5286af3539af1256e11"
+title: "Snippet title contains invalid characters like \"\\/:*?\\\"<>|\", \"/abs/path\", \"\\u0000123\""
+description: "Snippet title contains invalid characters like \"\\/:*?\\\"<>|\", \"/abs/path\", \"\\u0000123\""
+snippets: [
+  {
+    name: "case1.js"
+    mode: "JavaScript"
+    content: "console.log(`Test case for https://github.com/viko16/boost2fs/issues/1`)"
+  }
+]
+tags: []
+isStarred: false
+isTrashed: false
