@@ -3,6 +3,7 @@ const fs = require('fs-extra')
 const cson = require('cson')
 const ora = require('ora')
 const colors = require('colors/safe')
+const sanitizeFilename = require('sanitize-filename')
 
 const cwd = process.cwd()
 const DEFAULT_INPUT_PATH = './'
@@ -90,20 +91,26 @@ class B2f {
   async parseMarkdownNote (obj) {
     const { folder, title, content } = obj
     const outputFolderPath = await this.makeFolderDirectories(folder)
-    // fix unexpected too long title, see https://github.com/viko16/boost2fs/issues/2
-    const safeTitle = title.substr(0, 200)
+    const safeTitle = this.sanitizeTitle(title)
     await fs.writeFile(path.resolve(outputFolderPath, safeTitle + '.md'), content, 'utf-8')
   }
 
   async parseSnippetNote (obj) {
     const { folder, title, snippets } = obj
-    const outputFolderPath = await this.makeFolderDirectories(folder, title)
+    const safeTitle = this.sanitizeTitle(title)
+    const outputFolderPath = await this.makeFolderDirectories(folder, safeTitle)
     for (let i = 0; i < snippets.length; i++) {
       let { name, content } = snippets[i]
       // the snippet without name
       if (!name) name = '<noname>' + i
       await fs.writeFile(path.resolve(outputFolderPath, name), content, 'utf-8')
     }
+  }
+
+  sanitizeTitle (title) {
+    // remove directory paths and invalid characters, see viko16/boost2fs#1
+    // fix unexpected too long title, see viko16/boost2fs#2
+    return sanitizeFilename(title).substr(0, 200) || '<noname>'
   }
 }
 
