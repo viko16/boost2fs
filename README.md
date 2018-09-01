@@ -41,6 +41,7 @@ Options:
 ## Limitation
 
 - Tags, Star, Description in Snippet will be ignored. 🙈
+- All filename will be sanitized. ( eg. `hello\u0000world` => `helloworld.md` )
 
 ## Thanks
 - [BoostIO/Boostnote](https://github.com/BoostIO/Boostnote) - Note-taking app for programmers.
