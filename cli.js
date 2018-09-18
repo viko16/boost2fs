@@ -2,7 +2,6 @@
 
 const meow = require('meow')
 const B2f = require('.')
-const pkg = require('./package.json')
 
 const cli = meow(`
   Usage:
@@ -12,9 +11,9 @@ const cli = meow(`
     baseDir         Specify the input path, which includes 'boostnote.json' ( default: process.cwd() )
 
   Options:
-    -o, --output    Specify the output path   ( default: ./out )
-    --version   Output version number
-    --help      Output usage information
+    --output, -o    Specify the output path  ( default: ./out )
+    --version       Output version number
+    --help          Output usage information
 `, {
   flags: {
     output: {
