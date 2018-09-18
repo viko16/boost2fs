@@ -27,8 +27,8 @@ Commands:
 
 Options:
   -o, --output    Specify the output path   ( default: ./out )
-  -v, --version   Output version number
-  -h, --help      Output usage information
+  --version   Output version number
+  --help      Output usage information
 ```
 
 ## Feature

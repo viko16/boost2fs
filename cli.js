@@ -13,13 +13,15 @@ const cli = meow(`
 
   Options:
     -o, --output    Specify the output path   ( default: ./out )
-    -v, --version   Output version number     ( v${pkg.version} now )
-    -h, --help      Output usage information
+    --version   Output version number
+    --help      Output usage information
 `, {
-  alias: {
-    h: 'help',
-    v: 'version',
-    o: 'output'
+  flags: {
+    output: {
+      type: 'string',
+      default: './out',
+      alias: 'o'
+    }
   }
 })
 
