@@ -49,8 +49,13 @@ describe('Usage', () => {
       .end()
     await assertFileExists(expectedFiles)
   })
-})
 
-// TODO: Exception Handling
-describe.skip('Exception Handling', () => {
+  it('should work with specified baseDir and -o flag', async () => {
+    await coffee.fork(binfile, [ fixturePath, `-o=${fixturePath}/out` ])
+      // .debug()
+      .expect('stdout', [ /Found \d+ notes/, /Done/ ])
+      .expect('code', 0)
+      .end()
+    await assertFileExists(expectedFiles)
+  })
 })
