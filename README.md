@@ -34,8 +34,8 @@ Options:
 ## Feature
 
 - Export all notes into the output folder.
-- Covert <u>Markdown Notes</u> to `{title}.md`.
-- Covert <u>Snippet Notes</u> to `{title}/{filename}`.
+- Convert <u>Markdown Notes</u> to `{title}.md`.
+- Convert <u>Snippet Notes</u> to `{title}/{filename}`.
 - Deleted notes will be skipped.
 
 ## Limitation
