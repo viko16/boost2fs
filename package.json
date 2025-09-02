@@ -31,7 +31,7 @@
     "standard": "^12.0.1"
   },
   "dependencies": {
-    "colors": "^1.4.0",
+    "colors": "1.4.0",
     "cson": "^5.1.0",
     "fs-extra": "^7.0.1",
     "meow": "^5.0.0",
